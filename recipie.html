@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipie app</title>
+          <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+            </style>
+</head>
+<style>
+  
+    *{
+        margin: 0;
+        padding: 0;
+    box-sizing: border-box;
+    }
+    body{
+        background-color: #351f03d7;
+
+    }
+    nav{
+        padding: 11px;
+        color: whitesmoke;
+         background-color: rgba(0, 0, 0, 0.562);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1;
+    }
+    header nav h2{
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    form input[type="text"]{
+        flex-grow: 1;
+        padding: 3px;
+        margin-right: 5px;
+        outline:  none;
+    }
+     button{
+        padding: 3px;
+        background-color: red;
+        color: white;
+     }
+     @media screen and (max-width:500px){
+        header nav {
+            flex-direction: column;
+        }
+        header nav form button{
+            background-color: red;
+            color: white;
+            margin-top: 40px;
+        }
+        header nav form{
+          flex-direction: column;
+            border-radius: 4px;
+            border: none;
+            width:40%;
+            margin-top: 20px;
+            text-align: center;
+            flex-wrap:wrap ;
+        }  
+        header nav form #Searchbox{
+          width: 350px;
+          margin: 0 80px;
+          transform: translate(-230px, -5px);
+           position: absolute;
+          /* right: 100px; */
+        }
+        span .icon{
+          display: flex;
+        }
+     }
+     @media screen and (max-width:350px) {
+      header nav form #Searchbox{
+        width: 90px;
+        margin-left: 206px;
+       }
+     }
+     .submit{
+        border: none;
+     }
+     .submit:hover , .view:hover {
+           background-color: rgba(143, 10, 10, 0.829);
+           cursor: pointer;
+      }
+
+       container{
+       
+        text-align: center;
+        margin : 10px 10%;
+        display:grid;
+        
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        overflow: auto;
+        padding: 20px;
+        grid-gap: 40px;
+        place-items: center;
+       }
+         .recipi{
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            margin: 8px;
+            color: black;
+            border-radius: 6px;
+            box-shadow: 0 5px 10px ;
+            cursor: pointer;
+            max-width: 350px;
+            max-height: auto;
+            transition: 0.3s ease-in-out;
+         }
+.recipi img{
+    height: 300px;
+}
+.recipi:hover{
+    transform:scale(1.02);
+}
+.recipi h3{
+    font-size: 24px;
+margin-block: 5px;
+}
+.recipi p{
+    margin: 5px 0;
+    color: #4a4a4a;
+    font-size: 20px;
+}
+.recipi span{
+    font-weight: 600;
+}
+.view{
+   border: none;
+ margin: 12px auto;   
+ width: 90px; 
+ height: 25px;
+ border-radius: 6px;
+ }
+ .recipi-details{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+   /* background-color:rgb(255,255,255,0.1); */
+   backdrop-filter: blur(10px);
+   border: 1px solid black;
+    border-radius: 12px;
+    width: 40%;
+    height: 60%;
+    font-size: 20px;
+    transition: all 0.5s ease-in-out;
+    overflow-y: scroll;
+
+  }
+  .recipi-details::-webkit-scrollbar{
+    width:5px ;
+  }
+  .recipi-details::-webkit-scrollbar-thumb{
+    background: wheat;
+    border-radius: 16px;
+    --webkit-border-radius:16px;
+  }
+  .recipi-details-content{
+     padding: 30px;
+     /* margin: 20px 5px; */
+    color: black;
+           /* margin-top: 20px; */
+         cursor: pointer;
+     }
+    
+  
+
+  .recipi-details button{
+    position: absolute;
+    top: 15px;
+    /* left:90%; */
+    right: 20px;
+     border: none;
+    border-top-right-radius: 12px;
+    font-size: 25px;
+    }
+  .recipi-details button #cross-mark{
+    transition: 0.5s ease-in-out;
+ 
+  }
+  /* .recipi-details button:hover{
+    transition: 2s ease-in;
+    transform: scale(180deg);
+    background-color: white;
+    color: black;
+  } */
+  .recipi-details button #cross-mark:hover{
+    transform: rotate(270deg);
+    
+  }
+  .recipiName{
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: black;
+  }
+  .ingredientList li{
+ margin-bottom: 10px;
+margin-left: 20px;
+line-height: 30px;
+
+  }
+  .recipiInstructions p {
+    font-family: "Edu AU VIC WA NT Arrows", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+     line-height: 30px;
+    white-space: pre-line;
+    color:white;
+   }
+span .icon{
+  display: flex;
+  width: 5px;
+  font-size: 9px;
+}
+.add{
+   background-color: red;
+   padding: 3px;
+}
+.order{
+  position : relativee;
+  background-color: red;
+  color: white;
+  border: none;
+ margin: 4px 0px 15px 230px; 
+  
+ width: 55px; 
+ height: 17px;
+ border-radius: 6px;
+ padding: 3px;
+}
+.order:hover{
+  background-color: chocolate;
+  color: white;
+}
+
+     
+</style>
+<body>
+     <header>
+        <nav>
+            <h2>Recipie app</h2>
+            <form action=""> 
+           
+                <span class="icon" > 
+                  <i class="fa-solid fa-magnifying-glass"></i>
+            <input  type="text" id="Searchbox" placeholder="search yur favourite recipie">
+          </span>
+           
+            <button type="submit" id="Searchbtn" class="submit">Search</button>
+        </form>
+        <!-- ----------------------------------------------- -->
+  <div class="order"> </div>
+         <!-- --------------------------------------------------- -->
+        </nav>
+     </header>
+     <main>
+        <container class="recipie-container">
+
+         </container>
+
+         <div class="recipi-details">
+            <button type="button" class="recipi-close-btn">
+                <i id="cross-mark" class="fa-solid fa-xmark"></i>
+             </button>
+            <div class="recipi-details-content"></div>
+            
+         </div>
+                
+      </main>
+
+
+      <script>
+        let countnum = [];
+        let orders = [];
+        const count = document.querySelector(".count");
+        const Searchbtn = document.querySelector("#Searchbtn");
+        const Searchbox = document.querySelector("#Searchbox");
+        const recipiecontainer = document.querySelector(".recipie-container");
+         const  recipiDetailsContent = document.querySelector(".recipi-details-content");
+        const recipiCloseBtn = document.querySelector(".recipi-close-btn");
+        const recipiDetails = document.querySelector(".recipi-details");
+
+       
+
+        recipiecontainer.innerHTML = " <h2>Select your favourite recipis</h2>";
+
+         const fetchRecipis = async (query) =>{
+            recipiecontainer.innerHTML = " <h2>Fetching Recipis...</h2>";
+            try{
+            const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s= ${query}`);
+            const response = await data.json();
+            
+             recipiecontainer.innerHTML = "";
+            response.meals.forEach(meal =>{
+                    // ------------------create an element div and class recipi
+                const recipieDiv = document.createElement('div');
+                recipieDiv.classList.add('recipi');
+                recipieDiv.innerHTML = ` <img src = "${meal.strMealThumb}">
+                   <h2>${meal.strMeal}</h2>
+                  `
+                const button = document.createElement("button");
+                button.classList.add('view');
+                button.textContent = "View Recipi  ";
+                recipieDiv.append(button);
+                // adding eventlistner to recipi button
+                button.addEventListener("click",(f)=>{
+                    openRecipiPopup(meal);
+                })
+                // --------------------------------------------------Order button ---
+
+                const order = document.createElement("order");
+                order.classList.add('order');
+                order.textContent = "Order";
+                recipieDiv.append(order);
+
+                order.addEventListener("click",(meal)=>{
+                  console.log("add count num 2");
+                   
+                  
+                 })
+
+                recipiecontainer.appendChild(recipieDiv);
+                
+            });
+          }
+          catch(error) {
+            recipiecontainer.innerHTML = "<h2> Error in Fetch recipies....</h2>"
+          };
+          
+
+            console.log(response.meals);
+            
+         };
+        const fetchIngredients = (meal) =>{
+ let ingredientsList = "";
+ for(let i=1; i<=20; i++){
+    const ingredient = meal[`strIngredient${i}`];
+    if(ingredient){
+        const measure = meal[`strMeasure${i}`];
+        ingredientsList += `<li> ${measure} ${ingredient} </li>`
+    }
+    else{
+        break;
+    }
+ }
+ return ingredientsList;
+        }
+           const openRecipiPopup = (meal) =>{
+            recipiDetailsContent.innerHTML = 
+            ` 
+            <h2 class="recipiName" >${meal.strMeal}</h2>  
+            <h3> Ingredents: </h3>                                     
+              </ul class="ingredientList"> ${fetchIngredients(meal)} </ul>
+              <div class="recipiInstructions">
+                <h3> Instructions:</h3>
+                <p  > ${meal.strInstructions} </p>
+                </div>
+               
+                `
+            recipiDetailsContent.parentElement.style.display = "block";
+            
+            
+           }
+// ---------------------------------------------------------------
+// const openRecipiPopup = (meal) =>{
+          
+
+
+            recipiCloseBtn.addEventListener ("click",() =>{
+            recipiDetails.style.display = "none";
+            })
+
+        Searchbtn.addEventListener("click",(e)=>{
+            e.preventDefault();
+             
+           const searchInput = Searchbox.value.trim();  
+
+           if( searchInput== ""){
+            recipiecontainer.innerHTML="<h2>Type the meal in the search box </h2>";
+            return;
+           }
+           fetchRecipis(searchInput);
+        });
+
+       
+          
+         
+         
+
+
+      </script>
+          <script src="https://kit.fontawesome.com/6b7bb2516a.js" crossorigin="anonymous"></script>  
+</body>
+</html>
